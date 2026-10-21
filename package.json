@@ -1,0 +1,20 @@
+{
+  "name": "trip-fund-solidity",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ERC-20 trip crowdfunding with a transparent proxy V1 to V2 upgrade",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test",
+    "format:check": "forge fmt --check",
+    "validate:upgrade": "forge build --force && openzeppelin-upgrades-core validate out/build-info --contract src/TripFundV1.sol:TripFundV1 --unsafeAllow constructor && openzeppelin-upgrades-core validate out/build-info --contract src/TripFundV2.sol:TripFundV2 --reference src/TripFundV1.sol:TripFundV1 --requireReference --unsafeAllow constructor",
+    "check": "npm run format:check && npm run build && npm test && npm run validate:upgrade"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "5.4.0",
+    "@openzeppelin/upgrades-core": "1.44.2"
+  }
+}
